@@ -81,6 +81,7 @@ const changeSphereColor = (value) => {
     }
     sphereMaterial.diffuseColor = color;
 };
+    
 
 // Initial color update
 changeSphereColor(0.7); // Set the initial value
@@ -92,6 +93,9 @@ setInterval(() => {
     const randomValue = Math.random(); // Simulate a changing value
     changeSphereColor(randomValue);
 }, 1000);
+
+    
+
 
 // Render loop
 engine.runRenderLoop(() => {
@@ -120,6 +124,18 @@ objects.forEach((obj) => {
 window.addEventListener('resize', () => {
     engine.resize();
 });
+    
+const skybox = BABYLON.MeshBuilder.CreateBox('skybox', { size: 1000.0 }, scene);
+    const skyboxMaterial = new BABYLON.StandardMaterial('skyboxMaterial', scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture('path_to_your_skybox_images/skybox', scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    skybox.material = skyboxMaterial;
+
+
+
 
     // Handle user input
     let moveUp = false;
