@@ -1,6 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Babylon.js Navigation</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    #instructions {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #e80e0e;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+  <link rel="stylesheet" href="indexx.css">
+</head>
+<body>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+  <div id="instructions">
+    <span style="font-size: 50px">start exploring</span><br/>
+    <span>Move: WASD or Arrow Keys</span><br/>
+    <span>Move along 4th Dimension: Q/E</span><br/>
+    <span>Look: Mouse</span><br/><br/>
+    <span style="font-size: 16px; color: #f2ff00;">Click to start</span>
+</div>
+
   <canvas id="renderCanvas"></canvas>
   <script src="indexx.js"></script>
 
@@ -28,22 +65,8 @@
  
 // Create a sphere
 const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 2}, scene);
-
 const sphereMaterial = new BABYLON.StandardMaterial('sphereMaterial', scene);
 sphere.material = sphereMaterial;
-// Create a sphere
-
-
-
-// Insert the following code here to create the torus (ring) around the sphere
-const torus = BABYLON.MeshBuilder.CreateTorus('torus', {diameter: 3, thickness: 0.2}, scene);
-torus.position = sphere.position; // Align the torus with the sphere
-
-// Optionally, you can set a material for the torus
-const torusMaterial = new BABYLON.StandardMaterial('torusMaterial', scene);
-torusMaterial.diffuseColor = new BABYLON.Color3(1, 1, 0); // Yellow color
-torus.material = torusMaterial;
-
 
 // Function to change the sphere color based on some value
 const changeSphereColor = (value) => {
@@ -72,25 +95,6 @@ setInterval(() => {
 
 // Render loop
 engine.runRenderLoop(() => {
-  
-  const speed = 0.08;
-if (moveUp) camera.position.z += speed;
-if (moveDown) camera.position.z -= speed;
-if (moveLeft) camera.position.x += speed;
-if (moveRight) camera.position.x -= speed;
-
-// Update object scale based on fourth dimension position
-objects.forEach((obj) => {
-    const distance = Math.abs(fourthDimension - obj.initialFourthDimension);
-    const scale = 1 - Math.min(distance / 10, 0.9);
-    obj.scaling.set(scale, scale, scale);
-
-    // Rotate the object around its X, Y, and Z axes
-    obj.rotation.x += 0.01; // Adjust the rotation speed as needed
-    obj.rotation.y += 0.01; // Adjust the rotation speed as needed
-    obj.rotation.z += 0.01; // Adjust the rotation speed as needed
-});
-
     scene.render();
 });
 
@@ -172,18 +176,6 @@ const createObjects = (num) => {
     if (type < 0.33) {
       mesh = BABYLON.MeshBuilder.CreateSphere(`sphere${i}`, { diameter: Math.random() * 2 + 1 }, scene);
       let sphereMaterial = new BABYLON.StandardMaterial(`sphereMaterial${i}`, scene);
-      // Create a torus (ring) around the sphere
-      const torus = BABYLON.MeshBuilder.CreateTorus('torus', {diameter: 3, thickness: 0.2}, scene);
-      torus.position = sphere.position; // Align the torus with the sphere
-
-// Optionally, you can set a material for the torus
-      const torusMaterial = new BABYLON.StandardMaterial('torusMaterial', scene);
-      torusMaterial.diffuseColor = new BABYLON.Color3(1, 1, 0); // Yellow color
-      torus.material = torusMaterial;
-
-      
-
-      
 
     // Assign a random color
        sphereMaterial.emissiveColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
@@ -271,6 +263,7 @@ createObjects(200); // Creates 500 objects with spacing
         const scale = 1 - Math.min(distance / 10, 0.9);
         obj.scaling.set(scale, scale, scale);
       });
+     
 
       scene.render();
     });
@@ -291,7 +284,3 @@ createObjects(200); // Creates 500 objects with spacing
   </script>
 </body>
 </html>
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
